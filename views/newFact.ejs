@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <title>Cats | Fact</title>
+</head>
+<body>
+    <div class="wrapper p-3">
+        <%# <button class="btn btn-primary float-left mt-2" onclick="location.href='/'">Create</button> %>
+        <h1 class="text-center">Woohoo Cats
+            <button class="btn btn-warning float-right mt-2" onclick="location.href='/logout'">Logout</button>
+        </h1>
+        <hr/>
+        <div class="content-wrapper mt-2">
+            <div class="content-header">
+                <div class="col-12 col-sm-12 row text-center">
+                    <h4 class="col-6 border-right"><a href="/list">List</a></h4>
+                    <h4 class="col-6 border-left"><a href="/fact">Fact</a></h4>
+                </div>
+            </div>
+            <div class="content p-3">
+                <div class="container-fluid">
+                    <div class="card">
+                        <div class="card-body">
+                            <form action="/insertFact" method="post">
+                                <div class="form-group row mb-0">
+                                    <label class="col-1 mt-2 text-right">Facts</label>
+                                    <div class="col-9">
+                                        <input type="text" name="userFact" class="form-control" placeholder="Tell us what u know about these monsters..." required>
+                                    </div>
+                                    <div class="col-2">
+                                        <button type="submit" class="btn btn-primary">Share the news</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="card mt-2">
+                        <div class="card-header">
+                            <h4 class="text-muted">
+                                My Upload
+                                <% if(status == "admin"){ %>
+                                    <button class="btn btn-info float-right" onclick="location.href='/random/fact'">Add Random Fact</button>
+                                <% } %>
+                            </h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-bordered" id="table_my_facts">
+                                <thead>
+                                    <th class="col-10 text-center">Fact</th>
+                                    <th class="col-2">Action</th>
+                                </thead>
+                                <tbody>
+                                    <% for(var i = 0; i < catFact.length; i++){ %>
+                                        <tr>
+                                            <td><%= catFact[i].fact%></td>
+                                            <td><button class="btn btn-danger" onclick="location.href='/fact/delete/<%= catFact[i].id %>'">Delete</button></td>
+                                        </tr>
+                                    <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+$(document).ready(function(){
+    $('#table_my_facts').DataTable({
+        "language": {
+            "emptyTable":"No Data Found"
+        }
+    })
+})
+</script>
+</html>

@@ -1,0 +1,25 @@
+{
+  "name": "catapi-0.1",
+  "version": "1.0.0",
+  "description": "This is a cat api web system using ejs",
+  "main": "app.js",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "body-parser": "^1.19.0",
+    "ejs": "^2.6.2",
+    "express": "^4.17.1",
+    "express-session": "^1.16.2",
+    "mongoose": "^5.6.2",
+    "heroku": "^7.26.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node"
+  },
+  "keywords": [
+    "cat",
+    "api"
+  ],
+  "author": "Yap Chi Chien",
+  "license": "UNLICENSED"
+}
